@@ -120,6 +120,6 @@ __Runnable vs Thread__
 
 Источники:  
 [Потоки в Java. Наследуемся от Thread, реализуем интерфейс Runnable](http://javadevblog.com/potoki-v-java-nasleduemsya-ot-thread-realizuem-interfejs-runnable.html)  
-[Multithreading in Java](https://www.javatpoint.com/multithreading-in-java)
+[Multithreading in Java](https://www.javatpoint.com/multithreading-in-java)  
 [Cay S. Horstmann - Core Java, Volume I--Fundamentals](https://www.amazon.com/Core-Java-I-Fundamentals-10th/dp/0134177304)  
 [Cay S. Horstmann - Core Java, Volume II--Advanced Features: 2](https://www.amazon.com/Core-Java-II-Advanced-Features-ebook/dp/B01MTY3K7C)  
