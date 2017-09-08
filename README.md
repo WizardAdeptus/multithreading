@@ -115,10 +115,79 @@ __Runnable vs Thread__
 Если ваш класс предоставляет больше возможностей, чем просто запускаться в виде Thread, то вам лучше реализовать интерфейс Runnable. Если же вам просто нужно запустить в отдельном потоке, то вы можете наследоваться от класса Thread.
 Реализация Runnable является более предпочтительной, поскольку Java поддерживает реализацию нескольких интерфейсов. Если вы наследуете класс Thread, то вы уже не можете наследовать другие классы.
 
+## Multithreading in Java
+
+__How to create thread__
+There are two ways to create a thread:
+
+1. By extending Thread class
+2. By implementing Runnable interface.
+
+__Commonly used Constructors of Thread class:__
+
+* Thread()
+* Thread(String name)
+* Thread(Runnable r)
+* Thread(Runnable r,String name)
+
+__Commonly used methods of Thread class:__
+
+1. __public void run():__ is used to perform action for a thread.
+1. __public void start():__ starts the execution of the thread.JVM calls the run() method on the thread.
+1. __public void sleep(long miliseconds):__ Causes the currently executing thread to sleep (temporarily cease execution) for the specified number of milliseconds.
+1. __public void join():__ waits for a thread to die.
+1. __public void join(long miliseconds):__ waits for a thread to die for the specified miliseconds.
+1. __public int getPriority():__ returns the priority of the thread.
+1. __public int setPriority(int priority):__ changes the priority of the thread.
+1. __public String getName():__ returns the name of the thread.
+1. __public void setName(String name):__ changes the name of the thread.
+1. __public Thread currentThread():__ returns the reference of currently executing thread.
+1. __public int getId():__ returns the id of the thread.
+1. __public Thread.State getState():__ returns the state of the thread.
+1. __public boolean isAlive():__ tests if the thread is alive.
+1. __public void yield():__ causes the currently executing thread object to temporarily pause and allow other threads to execute.
+1. __public void suspend():__ is used to suspend the thread(depricated).
+1. __public void resume():__ is used to resume the suspended thread(depricated).
+1. __public void stop():__ is used to stop the thread(depricated).
+1. __public boolean isDaemon():__ tests if the thread is a daemon thread.
+1. __public void setDaemon(boolean b):__ marks the thread as daemon or user thread.
+1. __public void interrupt():__ interrupts the thread.
+1. __public boolean isInterrupted():__ tests if the thread has been interrupted.
+1. __public static boolean interrupted():__ tests if the current thread has been interrupted.
+
+
+__Can we start a thread twice__
+
+No. After starting a thread, it can never be started again. If you does so, an _IllegalThreadStateException_ is thrown. In such case, thread will run once but for second time, it will throw exception.
+
+__What if we call run() method directly instead start() method?__
+
+Each thread starts in a separate call stack.
+Invoking the run() method from main thread, the __run() method goes onto the current call stack__ rather than at the beginning of a new call stack.
+
+__The join() method__
+
+The join() method waits for a thread to die. In other words, it causes the currently running threads to stop executing until the thread it joins with completes its task.  
+__Syntax:__  
+public void join() throws InterruptedException
+public void join(long milliseconds) throws InterruptedException
 
 
 
-Источники:  
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Источники:  
 [Потоки в Java. Наследуемся от Thread, реализуем интерфейс Runnable](http://javadevblog.com/potoki-v-java-nasleduemsya-ot-thread-realizuem-interfejs-runnable.html)  
 [Multithreading in Java](https://www.javatpoint.com/multithreading-in-java)  
 [Cay S. Horstmann - Core Java, Volume I--Fundamentals](https://www.amazon.com/Core-Java-I-Fundamentals-10th/dp/0134177304)  
