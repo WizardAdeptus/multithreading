@@ -172,8 +172,139 @@ __Syntax:__
 public void join() throws InterruptedException
 public void join(long milliseconds) throws InterruptedException
 
+### Naming Thread and Current Thread
 
+__Naming Thread__
 
+The Thread class provides methods to change and get the name of a thread. By default, each thread has a name i.e. thread-0, thread-1 and so on. By we can change the name of the thread by using setName() method. The syntax of setName() and getName() methods are given below:
+
+* __public String getName():__ is used to return the name of a thread.
+* __public void setName(String name):__ is used to change the name of a thread.
+
+__Current Thread__
+
+The currentThread() method returns a reference of currently executing thread.
+```
+public static Thread currentThread()  
+```
+
+### Priority of a Thread (Thread Priority)
+
+Each thread have a priority. Priorities are represented by a number between 1 and 10. In most cases, thread schedular schedules the threads according to their priority (known as preemptive scheduling). But it is not guaranteed because it depends on JVM specification that which scheduling it chooses.
+
+__3 constants defiend in Thread class:__
+
+* __public static int MIN_PRIORITY__
+* __public static int NORM_PRIORITY__
+* __public static int MAX_PRIORITY__
+
+Default priority of a thread is 5 (NORM_PRIORITY). The value of MIN_PRIORITY is 1 and the value of MAX_PRIORITY is 10.
+
+### Daemon Thread in Java
+
+Daemon thread in java is a service provider thread that provides services to the user thread. Its life depend on the mercy of user threads i.e. when all the user threads dies, JVM terminates this thread automatically.
+
+There are many java daemon threads running automatically e.g. gc, finalizer etc.
+
+You can see all the detail by typing the jconsole in the command prompt. The jconsole tool provides information about the loaded classes, memory usage, running threads etc.
+
+__Points to remember for Daemon Thread in Java__
+
+* It provides services to user threads for background supporting tasks. It has no role in life than to serve user threads.
+* Its life depends on user threads.
+* It is a low priority thread.
+
+***
+__Why JVM terminates the daemon thread if there is no user thread?__  
+The sole purpose of the daemon thread is that it provides services to user thread for background supporting task. If there is no user thread, why should JVM keep running this thread. That is why JVM terminates the daemon thread if there is no user thread.
+
+***
+
+__Methods for Java Daemon thread by Thread class__
+
+The java.lang.Thread class provides two methods for java daemon thread.
+
+1. __public void setDaemon(boolean status)__ is used to mark the current thread as daemon thread or user thread.
+2. __public boolean isDaemon()__ is used to check that current is daemon.
+
+___Note:___  
+_If you want to make a user thread as Daemon, it must not be started otherwise it will throw __IllegalThreadStateException__._
+
+### Java Thread Pool
+
+Java Thread pool represents a group of worker threads that are waiting for the job and reuse many times.
+
+In case of thread pool, a group of fixed size threads are created. A thread from the thread pool is pulled out and assigned a job by the service provider. After completion of the job, thread is contained in the thread pool again.
+
+***
+__Advantage of Java Thread Pool__  
+Better performance It saves time because there is no need to create new thread.
+
+***
+__Real time usage__  
+It is used in Servlet and JSP where container creates a thread pool to process the request.
+
+***
+
+__Example of Java Thread Pool__
+
+Let's see a simple example of java thread pool using ExecutorService and Executors.
+
+__File: WorkerThread.java__
+```java
+import java.util.concurrent.ExecutorService;  
+import java.util.concurrent.Executors;  
+
+class WorkerThread implements Runnable {  
+    private String message;  
+
+    public WorkerThread(String s){  
+        this.message = s;  
+    } 
+
+    public void run() {  
+        System.out.println(Thread.currentThread().getName() + " (Start) message = " + message);  
+
+        // call processmessage method that sleeps the thread for 2 seconds 
+        processmessage();
+
+        // prints thread name   
+        System.out.println(Thread.currentThread().getName() + " (End)");
+    }  
+
+    private void processmessage() {  
+        try {  
+            Thread.sleep(2000);  
+        } catch (InterruptedException e) { 
+            e.printStackTrace(); 
+        }  
+    }  
+}
+```
+
+__File: JavaThreadPoolExample.java__
+```java
+public class TestThreadPool {  
+     public static void main(String[] args) { 
+
+        // creating a pool of 5 threads
+        ExecutorService executor = Executors.newFixedThreadPool(5);  
+
+        for (int i = 0; i < 10; i++) {  
+            Runnable worker = new WorkerThread("" + i);  
+
+            // calling execute method of ExecutorService  
+            executor.execute(worker);
+        }  
+        executor.shutdown();  
+
+        while (!executor.isTerminated()) {
+        }  
+  
+        System.out.println("Finished all threads");  
+    }  
+ }
+```
 
 
 
