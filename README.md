@@ -306,11 +306,50 @@ public class TestThreadPool {
  }
 ```
 
+### ThreadGroup in Java
 
+Java provides a convenient way to group multiple threads in a single object. In such way, we can suspend, resume or interrupt group of threads by a single method call.
 
+___Note:___  
+_Now suspend(), resume() and stop() methods are deprecated._
 
+Java thread group is implemented by java.lang.ThreadGroup class.
 
+__Constructors of ThreadGroup class__
 
+There are only two constructors of ThreadGroup class.
+
+1. __ThreadGroup(String name)__ creates a thread group with given name.
+2. __ThreadGroup(ThreadGroup parent, String name)__ creates a thread group with given parent group and name.
+
+__Important methods of ThreadGroup class__
+
+There are many methods in ThreadGroup class. A list of important methods are given below.
+
+|№|Method|Description|
+|:-:|:-|:-|
+|1|__int activeCount()__|returns no. of threads running in current group|
+|2|__int activeGroupCount()__|returns a no. of active group in this thread group|
+|3|__void destroy()__|destroys this thread group and all its sub groups|
+|4|__String getName()__|returns the name of this group|
+|5|__ThreadGroup getParent()__|returns the parent of this group|
+|6|__void interrupt()__|interrupts all threads of this group|
+|7|__void list()__|prints information of this group to standard console|
+
+А code to group multiple threads.
+```
+ThreadGroup tg1 = new ThreadGroup("Group A");
+Thread t1 = new Thread(tg1,new MyRunnable(),"one");
+Thread t2 = new Thread(tg1,new MyRunnable(),"two");
+Thread t3 = new Thread(tg1,new MyRunnable(),"three"); 
+```
+
+Now all 3 threads belong to one group. Here, tg1 is the thread group name, MyRunnable is the class that implements Runnable interface and "one", "two" and "three" are the thread names.
+
+Now we can interrupt all threads by a single line of code only.
+```
+Thread.currentThread().getThreadGroup().interrupt();
+```
 
 
 
