@@ -184,8 +184,8 @@ The Thread class provides methods to change and get the name of a thread. By def
 __Current Thread__
 
 The currentThread() method returns a reference of currently executing thread.
-```
-public static Thread currentThread()  
+```java
+public static Thread currentThread()
 ```
 
 ### Priority of a Thread (Thread Priority)
@@ -337,7 +337,7 @@ There are many methods in ThreadGroup class. A list of important methods are giv
 |7|__void list()__|prints information of this group to standard console|
 
 А code to group multiple threads.
-```
+```java
 ThreadGroup tg1 = new ThreadGroup("Group A");
 Thread t1 = new Thread(tg1,new MyRunnable(),"one");
 Thread t2 = new Thread(tg1,new MyRunnable(),"two");
@@ -347,7 +347,7 @@ Thread t3 = new Thread(tg1,new MyRunnable(),"three");
 Now all 3 threads belong to one group. Here, tg1 is the thread group name, MyRunnable is the class that implements Runnable interface and "one", "two" and "three" are the thread names.
 
 Now we can interrupt all threads by a single line of code only.
-```
+```java
 Thread.currentThread().getThreadGroup().interrupt();
 ```
 
